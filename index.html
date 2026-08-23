@@ -1,6 +1,26 @@
 <!doctype html>
 <html lang="ja">
 <head>
+<!-- Meta Pixel Code -->
+<script>
+window.META_PIXEL_ID = 'YOUR_PIXEL_ID_HERE'; // TODO: replace with the real Pixel ID from Meta Events Manager
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+if (window.META_PIXEL_ID && window.META_PIXEL_ID.indexOf('YOUR_PIXEL_ID') === -1) {
+  fbq('init', window.META_PIXEL_ID);
+  fbq('track', 'PageView');
+} else {
+  console.warn('[Meta Pixel] META_PIXEL_ID is still a placeholder — replace it in index.html before running ads.');
+}
+</script>
+<noscript id="fb-pixel-noscript"></noscript>
+<!-- End Meta Pixel Code -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>TURN LIMIT 100</title>
@@ -351,6 +371,23 @@
   footer.site p.tag { color: var(--ink-dim); font-size: 0.92rem; max-width: 42ch; margin: 0 auto 26px; }
   footer.site .copy { margin-top: 34px; font-size: 0.72rem; color: var(--border-dim); }
 
+  @media (max-height: 720px) {
+    .scrolldown { display: none; }
+  }
+
+  @media (max-width: 720px) {
+    .thesis-grid { grid-template-columns: 1fr; }
+    .clockface { margin: 0 auto; }
+  }
+
+  @media (max-width: 480px) {
+    .nav-inner { flex-wrap: wrap; row-gap: 8px; gap: 10px; }
+    .nav-word { font-size: 0.8rem; }
+    .nav-right { gap: 8px; }
+    .btn { padding: 8px 14px; font-size: 0.72rem; }
+    .lang-toggle button { padding: 5px 9px; }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .hero-bg { animation: none; }
     .scrolldown i { animation: none; }
@@ -605,5 +642,15 @@
   })();
 </script>
 
+<script>
+  (function () {
+    if (!window.META_PIXEL_ID || window.META_PIXEL_ID.indexOf('YOUR_PIXEL_ID') !== -1) return;
+    document.querySelectorAll('a[href*="store.steampowered.com"]').forEach(function (a) {
+      a.addEventListener('click', function () {
+        if (window.fbq) fbq('track', 'Lead', { content_name: 'steam_cta', content_category: 'wishlist' });
+      });
+    });
+  })();
+</script>
 </body>
 </html>
